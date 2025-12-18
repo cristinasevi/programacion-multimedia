@@ -38,5 +38,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation(libs.recyclerview)
+    implementation("androidx.room:room-runtime:2.8.2")
+    annotationProcessor("androidx.room:room-compiler:2.8.2")
 }
