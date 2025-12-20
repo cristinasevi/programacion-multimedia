@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ToDoList</string>
+    <string name="name_is_required">El nombre es obligatorio</string>
+    <string name="add">Añadir</string>
+    <string name="name_of_the_task">Nombre de la tarea</string>
+    <string name="done">Hecho</string>
+    <string name="register">Registrar</string>
+    <string name="task_description">Descripción de la tarea</string>
+    <string name="task_name">Nombre de la tarea</string>
+    <string name="task_added">Tarea añadida</string>
+</resources>
+
+<!-- Para crear otro fichero strings:
+ New Values Resource File -> Locale >> Language: es, Any Region
+ no modificar lo del name, solo la descripción -->

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ToDoList</string>
+    <string name="name_is_required">The name is required</string>
+    <string name="add">Add</string>
+    <string name="name_of_the_task">Name of the task</string>
+    <string name="done">Done</string>
+    <string name="register">Register</string>
+    <string name="task_description">Task description</string>
+    <string name="task_name">Task name</string>
+    <string name="task_added">Task added</string>
 </resources>
+
+    <!-- Para hacer que los textos cambien de idioma
+Alt + Intro -> Extract string resource -> crear nombre y descripción -->

@@ -1,16 +1,19 @@
-package programacion.multimedia.todolist;
+package programacion.multimedia.todolist.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import programacion.multimedia.todolist.R;
 import programacion.multimedia.todolist.adapter.TaskAdapter;
 import programacion.multimedia.todolist.db.AppDatabase;
 import programacion.multimedia.todolist.db.DatabaseUtil;
@@ -26,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final AppDatabase db = DatabaseUtil.getDb(this);
-        taskList = db.taskDao().findAll();
+        taskList = new ArrayList<>();
 
         RecyclerView todoList = findViewById(R.id.todoList);
         todoList.setHasFixedSize(true);
@@ -40,22 +42,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-    }
-
-    public void addTask(View view) {
-        EditText etTaskName = findViewById(R.id.taskName);
-        String taskName = etTaskName.getText().toString();
-        if (taskName.isEmpty()) {
-            Toast.makeText(this, "Define la tarea", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Task task = new Task(taskName);
-        final AppDatabase db = DatabaseUtil.getDb(this);
-        db.taskDao().insert(task);
-
-        etTaskName.setText("");
-        etTaskName.requestFocus();
 
         refreshTodoList();
     }
@@ -66,5 +52,23 @@ public class MainActivity extends AppCompatActivity {
         taskList.addAll(db.taskDao().findAll());
 
         taskAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.register_task_item) {
+            Intent intent = new Intent(this, RegisterTaskActivity.class);
+            startActivity(intent);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

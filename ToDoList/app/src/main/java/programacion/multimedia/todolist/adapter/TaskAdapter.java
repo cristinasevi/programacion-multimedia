@@ -1,11 +1,9 @@
 package programacion.multimedia.todolist.adapter;
 
 import android.content.Context;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -69,6 +67,19 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
                 taskList.remove(position);
                 notifyItemRemoved(position);
             });
+
+            // FIXME Ver donde encajar eso para que funcione correctamente
+//            int position = getAdapterPosition();
+//            Task task = taskList.get(position);
+//            if(task.isDone()) {
+//                itemView.setBackgroundColor(itemView.getContext().getResources().getColor(
+//                        android.R.color.holo_green_light, itemView.getContext().getTheme()
+//                ));
+//            } else {
+//                itemView.setBackgroundColor(itemView.getContext().getResources().getColor(
+//                        android.R.color.holo_red_light, itemView.getContext().getTheme()
+//                ));
+//            }
         }
     }
 }

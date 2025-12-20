@@ -13,16 +13,18 @@ public class Task {
     private String name;
     @ColumnInfo
     private String description;
+    @ColumnInfo
+    private boolean done;
 
     @Ignore
     public Task(String name) {
         this.name = name;
     }
 
-    // ToDo Por ahora no usar este constructor porque no tenemos description
-    public Task(String name, String description) {
+    public Task(String name, String description, boolean done) {
         this.name = name;
         this.description = description;
+        this.done = done;
     }
 
     public int getId() {
@@ -47,5 +49,13 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
     }
 }
