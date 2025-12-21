@@ -38,6 +38,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation("com.mapbox.maps:android:10.9.1")
     implementation("androidx.room:room-runtime:2.8.2")
     annotationProcessor("androidx.room:room-compiler:2.8.2")
 }

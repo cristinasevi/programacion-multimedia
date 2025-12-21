@@ -67,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
             return true;
+        } else if(item.getItemId() == R.id.tasks_map_item) {
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

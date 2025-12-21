@@ -7,4 +7,9 @@
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/register"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/tasks_map_item"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="@string/see_map"
+        app:showAsAction="always" />
 </menu>

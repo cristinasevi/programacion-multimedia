@@ -8,6 +8,8 @@
     <string name="task_description">Task description</string>
     <string name="task_name">Task name</string>
     <string name="task_added">Task added</string>
+    <string name="see_map">See map</string>
+    <string name="here">Here</string>
 </resources>
 
     <!-- Para hacer que los textos cambien de idioma

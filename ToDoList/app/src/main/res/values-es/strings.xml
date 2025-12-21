@@ -8,6 +8,8 @@
     <string name="task_description">Descripción de la tarea</string>
     <string name="task_name">Nombre de la tarea</string>
     <string name="task_added">Tarea añadida</string>
+    <string name="see_map">Ver mapa</string>
+    <string name="here">Aquí</string>
 </resources>
 
 <!-- Para crear otro fichero strings:

@@ -15,16 +15,22 @@ public class Task {
     private String description;
     @ColumnInfo
     private boolean done;
+    @ColumnInfo
+    private double latitude;
+    @ColumnInfo
+    private double longitude;
 
     @Ignore
     public Task(String name) {
         this.name = name;
     }
 
-    public Task(String name, String description, boolean done) {
+    public Task(String name, String description, boolean done, double latitude, double longitude) {
         this.name = name;
         this.description = description;
         this.done = done;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -57,5 +63,21 @@ public class Task {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
