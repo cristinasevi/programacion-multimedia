@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndroidGames</string>
+    <string name="game_name">Nombre del Juego</string>
+    <string name="game_description">Descripción</string>
+    <string name="game_type">Tipo de juego</string>
+    <string name="release_date">Fecha de lanzamiento</string>
+    <string name="price">Precio</string>
+    <string name="category">Categoría</string>
+    <string name="register">Registrar</string>
+</resources>
