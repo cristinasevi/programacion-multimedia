@@ -16,10 +16,10 @@
         android:theme="@style/Theme.AndroidGames"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.RegisterGameActivity"
+            android:name=".view.RegisterGameActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".view.GameListView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
