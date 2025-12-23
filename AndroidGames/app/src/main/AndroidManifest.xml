@@ -16,7 +16,7 @@
         android:theme="@style/Theme.AndroidGames"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.RegisterGameActivity"
+            android:name=".view.RegisterGameView"
             android:exported="false" />
         <activity
             android:name=".view.GameListView"

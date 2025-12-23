@@ -16,15 +16,10 @@ import java.util.List;
 
 import programacion.multimedia.androidgames.R;
 import programacion.multimedia.androidgames.adapter.GameAdapter;
-import programacion.multimedia.androidgames.api.GameApi;
-import programacion.multimedia.androidgames.api.GameApiInterface;
 import programacion.multimedia.androidgames.contract.GameListContract;
 import programacion.multimedia.androidgames.domain.Game;
 
 import programacion.multimedia.androidgames.presenter.GameListPresenter;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class GameListView extends AppCompatActivity implements GameListContract.View {
 
@@ -83,7 +78,7 @@ public class GameListView extends AppCompatActivity implements GameListContract.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_register_game) {
-            Intent intent = new Intent(this, RegisterGameActivity.class);
+            Intent intent = new Intent(this, RegisterGameView.class);
             startActivity(intent);
 
             return true;
