@@ -7,4 +7,7 @@
     <string name="price">Price</string>
     <string name="category">Category</string>
     <string name="register">Register</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

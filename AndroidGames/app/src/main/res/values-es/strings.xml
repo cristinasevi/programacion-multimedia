@@ -8,4 +8,7 @@
     <string name="price">Precio</string>
     <string name="category">Categoría</string>
     <string name="register">Registrar</string>
+    <string name="are_you_sure">¿Estás seguro?</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
 </resources>

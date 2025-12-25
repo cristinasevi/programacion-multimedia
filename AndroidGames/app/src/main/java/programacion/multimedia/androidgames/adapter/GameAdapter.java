@@ -1,9 +1,12 @@
 package programacion.multimedia.androidgames.adapter;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +16,7 @@ import java.util.List;
 
 import programacion.multimedia.androidgames.R;
 import programacion.multimedia.androidgames.domain.Game;
+import programacion.multimedia.androidgames.util.DialogUtil;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder> {
 
@@ -47,12 +51,24 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder> {
 
         private TextView gameName;
         private TextView gameDescription;
+        private Button removeButton;
 
         public GameHolder(@NonNull View itemView) {
             super(itemView);
 
             gameName = itemView.findViewById(R.id.item_game_name);
             gameDescription = itemView.findViewById(R.id.item_game_description);
+            removeButton = itemView.findViewById(R.id.remove_game_item_button);
+
+            removeButton.setOnClickListener(view -> {
+                AlertDialog.Builder dialogBuilder = DialogUtil.alertDialogBuilder(
+                        context, context.getString(R.string.are_you_sure));
+                dialogBuilder
+                        .setPositiveButton(R.string.yes, (dialog, i) -> {
+                            // ToDo Eliminar el game
+                        });
+                dialogBuilder.create().show();
+            });
         }
     }
 }

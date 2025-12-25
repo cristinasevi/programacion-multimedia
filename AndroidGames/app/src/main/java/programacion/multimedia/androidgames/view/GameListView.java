@@ -82,6 +82,9 @@ public class GameListView extends AppCompatActivity implements GameListContract.
             startActivity(intent);
 
             return true;
+        } else if (item.getItemId() == R.id.action_preferences_item) {
+            Intent intent = new Intent(this, PreferencesActivity.class);
+            startActivity(intent);
         }
 
         return false;
