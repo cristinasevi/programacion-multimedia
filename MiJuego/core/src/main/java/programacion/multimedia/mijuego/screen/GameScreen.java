@@ -1,86 +1,31 @@
 package programacion.multimedia.mijuego.screen;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
-import programacion.multimedia.mijuego.domain.Drop;
-import programacion.multimedia.mijuego.domain.Player;
-
-import static programacion.multimedia.mijuego.util.Constants.TIME_BETWEEN_DROPS;
+import programacion.multimedia.mijuego.manager.LogicManager;
+import programacion.multimedia.mijuego.manager.RenderManager;
+import programacion.multimedia.mijuego.manager.ResourceManager;
 
 /** Pantalla de juego */
 public class GameScreen implements Screen {
 
-    private SpriteBatch batch;
-    private Player player;
-    private Texture dropTexture;
-    private Array<Drop> drops;
-    private long lastDrop;
-    private Sound dropSound;
-    private Music gameMusic;
+    private LogicManager logicManager;
+    private RenderManager renderManager;
+
+    public GameScreen() {
+        logicManager = new LogicManager();
+        renderManager = new RenderManager(logicManager);
+    }
 
     @Override
     public void show() {
-        player = new Player(new Texture(Gdx.files.internal("textures/bucket.png")));
-        dropTexture = new Texture(Gdx.files.internal("textures/drop.png"));
-        dropSound = Gdx.audio.newSound(Gdx.files.internal("sounds/waterdrop.mp3"));
-        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/undertreeinrain.mp3"));
-        drops = new Array<>();
-        batch = new SpriteBatch();
-
-        lastDrop = TimeUtils.millis();
-
-        gameMusic.play();
+        logicManager.load();
+        renderManager.load();
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        // Generación de gotas/enemigos
-        if(TimeUtils.timeSinceMillis(lastDrop) >= TIME_BETWEEN_DROPS) {
-            Drop newDrop = new Drop(dropTexture, MathUtils.random(0, 1024), 768);
-            drops.add(newDrop);
-            lastDrop = TimeUtils.millis();
-        }
-
-        batch.begin();
-        player.draw(batch);
-        for(Drop drop : drops) {
-            drop.draw(batch);
-        }
-        batch.end();
-
-        player.handleInput(delta);
-
-        for(Drop drop : drops) {
-            drop.move(delta);
-
-            // Una gota colisiona con el jugador
-            if(drop.getRectangle().overlaps(player.getRectangle())) {
-                dropSound.play();
-                drops.removeValue(drop, true);
-            }
-
-            // Eliminar las gotas cuando llegan al suelo
-            if(drop.getTopPosition() < 0) {
-                drops.removeValue(drop, true);
-            }
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenuScreen());
-        }
+        logicManager.update(delta);
+        renderManager.drawFrame();
     }
 
     @Override
@@ -109,9 +54,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        player.dispose();
-        dropTexture.dispose();
-        batch.dispose();
-        drops.clear();
+        logicManager.dispose();
+        renderManager.dispose();
     }
 }

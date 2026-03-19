@@ -10,11 +10,21 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
+import programacion.multimedia.mijuego.manager.ResourceManager;
 
 /** First screen of the application. Displayed after the application is created. */
 public class MainMenuScreen implements Screen {
 
     private Stage stage;
+
+    public MainMenuScreen() {
+        // ToDo Mejorar para mostrar un SplashScreen en su lugar
+        ResourceManager.loadAllResources();
+
+        while (!ResourceManager.update()) {
+            // ToDo Hacer algo mientras los recursos se cargan
+        }
+    }
 
     @Override
     public void show() {

@@ -1,4 +1,38 @@
 package programacion.multimedia.mijuego.manager;
 
-public class RenderManager {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Disposable;
+import programacion.multimedia.mijuego.domain.Drop;
+
+public class RenderManager implements Disposable {
+
+    private SpriteBatch batch;
+    private LogicManager logicManager;
+
+    public RenderManager(LogicManager logicManager) {
+        this.logicManager = logicManager;
+    }
+
+    public void load() {
+        batch = new SpriteBatch();
+    }
+
+    public void drawFrame() {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
+        logicManager.player.draw(batch);
+        for(Drop drop : logicManager.drops) {
+            drop.draw(batch);
+        }
+        batch.end();
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+    }
 }
