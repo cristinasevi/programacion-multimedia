@@ -4,70 +4,43 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.TimeUtils;
-import programacion.multimedia.mijuego.domain.Drop;
+import programacion.multimedia.mijuego.domain.Enemy;
 import programacion.multimedia.mijuego.domain.Player;
 import programacion.multimedia.mijuego.screen.MainMenuScreen;
 
-import static programacion.multimedia.mijuego.util.Constants.TIME_BETWEEN_DROPS;
+import static programacion.multimedia.mijuego.domain.Character.State.RUNNING_LEFT;
 
 public class LogicManager implements Disposable {
 
     protected Player player;
-    protected Array<Drop> drops;
+    // ToDo Gestionar todos los enemigos como un array
+    protected Enemy enemy;
 
-    private long lastDrop;
-    private Sound dropSound;
     private Music gameMusic;
-    private Texture dropTexture;
 
     public LogicManager() {
-        drops = new Array<>();
-        dropTexture = new Texture(Gdx.files.internal("textures/drop.png"));
-        dropSound = ResourceManager.getSound("waterdrop.mp3");
-        gameMusic = ResourceManager.getMusic("undertreeinrain.mp3");
-
     }
 
     public void load() {
-        player = new Player(new Texture(Gdx.files.internal("textures/bucket.png")));
+        player = new Player(ResourceManager.getRegion("player_idle_right"), "player_run_left", "player_run_right");
+        enemy = new Enemy(ResourceManager.getRegion("green_bubble_left"), new Vector2(1000, 100),
+            RUNNING_LEFT, "green_bubble_left", "green_bubble_right");
 
-        lastDrop = TimeUtils.millis();
+        // FIXME
+//        if(ConfigurationManager.isMusicEnabled())
+//            gameMusic.play();
 
-        if(ConfigurationManager.isMusicEnabled())
-            gameMusic.play();
+        // ToDo Gestionar como hacer aparecer los enemigos
     }
 
     public void update(float dt) {
-        // Generación de gotas/enemigos
-        if(TimeUtils.timeSinceMillis(lastDrop) >= TIME_BETWEEN_DROPS / ConfigurationManager.getGameLevel()) {
-            Drop newDrop = new Drop(dropTexture, MathUtils.random(0, 1024), 768);
-            drops.add(newDrop);
-            lastDrop = TimeUtils.millis();
-        }
-
         player.handleInput(dt);
+        player.update(dt);
 
-        for(Drop drop : drops) {
-            drop.move(dt);
-
-            // Una gota colisiona con el jugador
-            if(drop.getRectangle().overlaps(player.getRectangle())) {
-                if (ConfigurationManager.isSoundEnabled())
-                    dropSound.play();
-                drops.removeValue(drop, true);
-            }
-
-            // Eliminar las gotas cuando llegan al suelo
-            if(drop.getTopPosition() < 0) {
-                drops.removeValue(drop, true);
-            }
-        }
+        // ToDo Gestionar todos los enemigos como un array
+        enemy.update(dt);
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenuScreen());
@@ -77,7 +50,5 @@ public class LogicManager implements Disposable {
     @Override
     public void dispose() {
         player.dispose();
-        dropTexture.dispose();
-        drops.clear();
     }
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Disposable;
-import programacion.multimedia.mijuego.domain.Drop;
 
 public class RenderManager implements Disposable {
 
@@ -25,9 +24,8 @@ public class RenderManager implements Disposable {
 
         batch.begin();
         logicManager.player.draw(batch);
-        for(Drop drop : logicManager.drops) {
-            drop.draw(batch);
-        }
+        // ToDo Gestionar enemigos como un array
+        logicManager.enemy.draw(batch);
         batch.end();
     }
 
