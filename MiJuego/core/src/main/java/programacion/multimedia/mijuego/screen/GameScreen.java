@@ -1,30 +1,33 @@
 package programacion.multimedia.mijuego.screen;
 
 import com.badlogic.gdx.Screen;
-import programacion.multimedia.mijuego.manager.LogicManager;
-import programacion.multimedia.mijuego.manager.RenderManager;
-import programacion.multimedia.mijuego.manager.ResourceManager;
+import programacion.multimedia.mijuego.manager.*;
 
 /** Pantalla de juego */
 public class GameScreen implements Screen {
 
     private LogicManager logicManager;
     private RenderManager renderManager;
+    private LevelManager levelManager;
+    private CameraManager cameraManager;
 
     public GameScreen() {
         logicManager = new LogicManager();
-        renderManager = new RenderManager(logicManager);
+        levelManager = new LevelManager(logicManager);
+        levelManager.loadCurrentLevel();
+        renderManager = new RenderManager(logicManager, levelManager.batch);
+        cameraManager = new CameraManager(logicManager, levelManager);
     }
 
     @Override
     public void show() {
         logicManager.load();
-        renderManager.load();
     }
 
     @Override
     public void render(float delta) {
         logicManager.update(delta);
+        cameraManager.handleCamera();
         renderManager.drawFrame();
     }
 

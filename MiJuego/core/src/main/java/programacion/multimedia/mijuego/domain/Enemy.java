@@ -5,14 +5,19 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Enemy extends Character {
 
-    public Enemy(TextureRegion currentFrame, Vector2 position, State initialState, String leftAnimationName, String rightAnimationName) {
+    private int speed;
+
+    public Enemy(TextureRegion currentFrame, Vector2 position, State initialState, int speed,
+                 String leftAnimationName, String rightAnimationName) {
         super(currentFrame, position, initialState, leftAnimationName, rightAnimationName);
+
+        this.speed = speed;
     }
 
     @Override
     public void update(float dt) {
         super.update(dt);
 
-        position.x -= 100 * dt;
+        position.x -= speed * dt;
     }
 }

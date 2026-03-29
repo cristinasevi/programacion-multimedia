@@ -1,31 +1,26 @@
 package programacion.multimedia.mijuego.manager;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Disposable;
+import programacion.multimedia.mijuego.domain.Enemy;
 
 public class RenderManager implements Disposable {
 
-    private SpriteBatch batch;
+    private Batch batch;
     private LogicManager logicManager;
 
-    public RenderManager(LogicManager logicManager) {
+    public RenderManager(LogicManager logicManager, Batch batch) {
         this.logicManager = logicManager;
-    }
-
-    public void load() {
-        batch = new SpriteBatch();
+        this.batch = batch;
     }
 
     public void drawFrame() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         logicManager.player.draw(batch);
         // ToDo Gestionar enemigos como un array
-        logicManager.enemy.draw(batch);
+        for(Enemy enemy : logicManager.enemies) {
+            enemy.draw(batch);
+        }
         batch.end();
     }
 
